@@ -19,23 +19,23 @@
 
 - (id)initImagePicker
 {
-    ELCAlbumPickerController *albumPicker = [[ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
+	ELCAlbumPickerController *albumPicker = [[ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
 
-    self = [super initWithRootViewController:albumPicker];
-    if (self) {
-        self.maximumImagesCount = 4;
-        [albumPicker setParent:self];
-    }
-    return self;
+	self = [super initWithRootViewController:albumPicker];
+	if (self) {
+		self.maximumImagesCount = 4;
+		[albumPicker setParent:self];
+	}
+	return self;
 }
 
 - (id)initWithRootViewController:(UIViewController *)rootViewController
 {
-    self = [super initWithRootViewController:rootViewController];
-    if (self) {
-        self.maximumImagesCount = 4;
-    }
-    return self;
+	self = [super initWithRootViewController:rootViewController];
+	if (self) {
+		self.maximumImagesCount = 4;
+	}
+	return self;
 }
 
 - (void)cancelImagePicker
@@ -47,17 +47,17 @@
 
 - (BOOL)shouldSelectAsset:(ELCAsset *)asset previousCount:(NSUInteger)previousCount
 {
-    BOOL shouldSelect = previousCount < self.maximumImagesCount;
-    if (!shouldSelect) {
-        NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Maximum %d photos.", nil), self.maximumImagesCount];
-        NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You can only select %d photos at a time.", nil), self.maximumImagesCount];
-        [[[UIAlertView alloc] initWithTitle:title
-                                    message:message
-                                   delegate:nil
-                          cancelButtonTitle:nil
-                          otherButtonTitles:NSLocalizedString(@"Okay", nil), nil] show];
-    }
-    return shouldSelect;
+	BOOL shouldSelect = previousCount < self.maximumImagesCount;
+	if (!shouldSelect) {
+		NSString *title = [NSString stringWithFormat:NSLocalizedString(@"Maximum %d photos.", nil), self.maximumImagesCount];
+		NSString *message = [NSString stringWithFormat:NSLocalizedString(@"You can only select %d photos at a time.", nil), self.maximumImagesCount];
+		[[[UIAlertView alloc] initWithTitle:title
+		                            message:message
+		                           delegate:nil
+		                  cancelButtonTitle:nil
+		                  otherButtonTitles:NSLocalizedString(@"Okay", nil), nil] show];
+	}
+	return shouldSelect;
 }
 
 - (void)selectedAssets:(NSArray *)assets
@@ -79,17 +79,17 @@
 	if (_imagePickerDelegate != nil && [_imagePickerDelegate respondsToSelector:@selector(elcImagePickerController:didFinishPickingMediaWithInfo:)]) {
 		[_imagePickerDelegate performSelector:@selector(elcImagePickerController:didFinishPickingMediaWithInfo:) withObject:self withObject:returnArray];
 	} else {
-        [self popToRootViewControllerAnimated:NO];
-    }
+		[self popToRootViewControllerAnimated:NO];
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return YES;
-    } else {
-        return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
-    }
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+		return YES;
+	} else {
+		return toInterfaceOrientation != UIInterfaceOrientationPortraitUpsideDown;
+	}
 }
 
 @end
